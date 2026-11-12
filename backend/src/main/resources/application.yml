@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: shiftboard
+  datasource:
+    # Connection details come from environment variables.
+    # URL and username have local-dev defaults; the password has NO default on purpose,
+    # so the app refuses to start if DB_PASSWORD isn't set.
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/shiftboard}
+    username: ${DB_USERNAME:shiftboard}
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.hibernate.SQL: debug

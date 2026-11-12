@@ -1,0 +1,94 @@
+body { margin: 0; font-family: system-ui, sans-serif; }
+
+/* ---------- Page layout ---------- */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;          /* the app fills exactly the browser window */
+}
+
+.content {
+  flex: 1;                /* take ALL the leftover height */
+  overflow: auto;         /* scroll HERE, not the whole page */
+}
+
+/* ---------- Top bar ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  height: 44px;
+  background: #4bd3c5;
+  color: white;
+}
+.brand { font-weight: 700; }
+.title { opacity: 0.85; }
+
+/* ---------- Toolbar ---------- */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;   /* week label on the left, calendar on the right */
+  gap: 12px;
+  padding: 8px 16px;
+  border-bottom: 1px solid #cfd5da;
+}
+.week-label { font-weight: 600; font-size: 14px; }
+
+/* ---------- Calendar picker ---------- */
+.period-picker {
+  position: relative;               /* so the hidden input sits right under the icon */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #1d4e5f;
+  font-size: 13px;
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border: none;
+  background: none;
+  padding: 4px;
+  border-radius: 6px;
+  color: inherit;
+  cursor: pointer;
+}
+.icon-button:hover { background: #eef5f7; }
+.caret { font-size: 10px; }
+
+.hidden-date-input {
+  position: absolute;
+  left: 0;
+  top: 100%;                        /* the calendar pops up just below the icon */
+  width: 1px;
+  height: 1px;
+  opacity: 0;                       /* invisible, but still "on the page" so showPicker() works */
+  border: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+/* ---------- Grid ---------- */
+.row {
+  display: grid;
+  grid-template-columns: 240px repeat(7, 1fr);  /* Name column + 7 equal day columns */
+  border-bottom: 1px solid #e3e7ea;
+}
+
+.cell {
+  padding: 0 10px;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #e3e7ea;
+  font-size: 13px;
+}
+.cell:first-child { border-left: none; }
+.header .cell { color: #66727d; font-size: 12px; }
+
+/* ---------- Messages ---------- */
+.message { padding: 40px; text-align: center; color: #66727d; }
