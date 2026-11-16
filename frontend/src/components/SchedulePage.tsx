@@ -1,6 +1,7 @@
 import { useEffect,  useState } from 'react';
 import type { Employee, PageResponse } from '../types';
-import { formatDayHeader, formatWeekRange, startOfWeek, weekDays } from '../utils/week';
+import { formatWeekRange, startOfWeek, weekDays } from '../utils/week';
+import { ScheduleGrid } from './ScheduleGrid';
 
 
 //we need days and employees to show on the page, for now.
@@ -37,25 +38,7 @@ export function SchedulePage() {
                 {loading && <p className="message">Loading employees..</p>}
                 {error && <p className="message">{error}</p>}
 
-                {!loading && !error && (
-                    <div className="grid">
-                        <div className="row header">
-                            <div className="cell">Name</div>
-                            {days.map((day) => (
-                                <div className="cell" key={day.toISOString()}>{formatDayHeader(day)}</div>
-                            ))}
-                        </div>
-
-                        {employees.map((emp) => (
-                            <div className="row" key={emp.id}>
-                                <div className="cell">{emp.fullName}</div>
-                                {days.map((day) => (
-                                    <div className="cell" key={day.toISOString()}></div>
-                                ))}
-                            </div>
-                        ))}
-                    </div>
-                )}
+                {!loading && !error && <ScheduleGrid employees={employees} days={days}/>}
             </main>
         </div>
     );

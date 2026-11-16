@@ -92,3 +92,24 @@ body { margin: 0; font-family: system-ui, sans-serif; }
 
 /* ---------- Messages ---------- */
 .message { padding: 40px; text-align: center; color: #66727d; }
+
+.name-cell { gap: 10px; }
+
+.avatar {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  background: #e7ebee;
+  color: #5b6770;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
