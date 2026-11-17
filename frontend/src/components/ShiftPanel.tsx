@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { Employee, Shift } from "../types";
 import { initials } from "../utils/names";
-import { formatDuration, formatShiftTime, formatTime } from "../utils/shifts";
+import { formatDuration, formatShiftDate, formatShiftTime, formatTime } from "../utils/shifts";
 
 interface Props {
     shift: Shift;
@@ -9,8 +10,18 @@ interface Props {
 }
 
 const label = (code: string) => code.charAt(0) + code.slice(1).toLowerCase();
+const orDash = (value: string | null | undefined) => (value && value.trim() ? value : '–');
 
 export function ShiftPanel({shift, employee, onClose}: Props) {
+
+    useEffect(() => {
+        const onKeyDown = (e:KeyboardEvent) => {
+            if (e.key === 'Escape') onClose();
+        };
+        window.addEventListener('keydown', onKeyDown);
+        return () => window.removeEventListener('keydown', onKeyDown);
+    }, [onClose]);
+
     return (
         <aside className="shift-panel">
             <div className="panel-header">
@@ -19,15 +30,18 @@ export function ShiftPanel({shift, employee, onClose}: Props) {
             </div>
 
             <div className="panel-body">
-                <p className="panel-summary">
-                    {formatShiftTime(shift)} [{formatDuration(shift.startDatetime, shift.endDatetime)}]
-                </p>
+                <div className="panel-headline">
+                    <div className="headline-date">{formatShiftDate(shift)}</div>
+                    <div className="headline-time">
+                        {formatShiftTime(shift)} [{formatDuration(shift.startDatetime, shift.endDatetime)}]
+                    </div>
+                </div>
 
                 <div className="panel-employee">
-                    <span className="avatar">{employee ? initials(employee.fullName) : '?'}</span>
+                    <span className="avatar">{employee ? initials(employee.fullName) : '–'}</span>
                     <div>
                         <div className="panel-label">Employee</div>
-                        <div>{employee?.fullName ?? 'Unknown employee'}</div>
+                        <div>{orDash(employee?.fullName)}</div>
                     </div>
                 </div>
 

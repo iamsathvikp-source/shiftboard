@@ -15,6 +15,13 @@ const timeInHospital = new Intl.DateTimeFormat('en-US', {
     minute: '2-digit',
 })
 
+const dayInHospital = new Intl.DateTimeFormat('en-US', {
+  timeZone: HOSPITAL_TIME_ZONE,
+  weekday: 'short',
+  month: 'short',
+  day: 'numeric',
+});
+
 export function scheduleDate(shift: Shift): string {
   const parts = dateInHospital.formatToParts(new Date(shift.startDatetime));
   const part = (type: string) => parts.find((p) => p.type === type)?.value ?? '';
@@ -53,4 +60,10 @@ export function formatTime(iso: string): string {
 export function formatDuration(startIso: string, endIso: string): string {
   const minutes = Math.round((Date.parse(endIso) - Date.parse(startIso)) / 60000);
   return `${Math.floor(minutes / 60)}:${String(minutes % 60).padStart(2, '0')}`;
+}
+
+export function formatShiftDate(shift: Shift): string {
+  const start = dayInHospital.format(new Date(shift.startDatetime));
+  const end = dayInHospital.format(new Date(shift.endDatetime));
+  return start === end ? start : `${start} – ${end}`;
 }
