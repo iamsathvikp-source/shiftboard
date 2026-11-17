@@ -13,3 +13,18 @@ export interface PageResponse<T> {
   totalElements: number;
   totalPages: number;
 }
+
+export interface ShiftSegment {
+  type: string;
+  startDatetime: string;
+  endDatetime: string;
+  paid: boolean;
+}
+
+export interface Shift {
+  id: number;
+  employeeId: number;
+  startDatetime: string;
+  endDatetime: string;
+  segments: ShiftSegment[];
+}

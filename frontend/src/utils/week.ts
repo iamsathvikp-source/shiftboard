@@ -20,3 +20,10 @@ const longDay = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'sho
 
 export const formatDayHeader = (d: Date) => `${dayName.format(d)} ${monthDay.format(d)}`;
 export const formatWeekRange = (start: Date) => `${longDay.format(start)} – ${longDay.format(addDays(start, 6))}`;
+
+export function toIsoDate(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
