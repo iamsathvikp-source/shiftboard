@@ -19,7 +19,7 @@ body { margin: 0; font-family: system-ui, sans-serif; }
   gap: 16px;
   padding: 0 20px;
   height: 44px;
-  background: #4bd3c5;
+  background: #50ada3;
   color: white;
 }
 .brand { font-weight: 700; }
@@ -157,7 +157,9 @@ body { margin: 0; font-family: system-ui, sans-serif; }
 .icon-close { border: none; background: none; font-size: 18px; color: #1d4e5f; cursor: pointer; }
 
 .panel-body { flex: 1; overflow: auto; padding: 16px 18px; }
-.panel-summary { font-size: 15px; margin: 0 0 16px; }
+.panel-headline { margin-bottom: 18px; }
+.headline-date { font-size: 13px; color: #66727d; margin-bottom: 2px; }
+.headline-time { font-size: 16px; }
 .panel-employee { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; }
 .panel-label { font-size: 11px; color: #66727d; margin-bottom: 2px; }
 .panel-section { font-size: 13px; margin: 0 0 10px; color: #1d4e5f; }
